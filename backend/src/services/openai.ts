@@ -48,8 +48,7 @@ Provide at least 3 items for each array field.`;
       { role: 'system', content: systemPrompt },
       { role: 'user', content: userPrompt }
     ],
-    response_format: { type: 'json_object' },
-    temperature: 0.7
+    response_format: { type: 'json_object' }
   });
 
   const responseText = completion.choices[0].message.content || '{}';
