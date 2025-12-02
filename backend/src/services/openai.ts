@@ -5,6 +5,7 @@
  * Constructs prompts and parses responses for argument analysis
  */
 
+import 'dotenv/config';
 import OpenAI from 'openai';
 import { AnalysisResult } from '../types';
 
@@ -42,7 +43,7 @@ Provide your analysis in the following JSON format:
 Provide at least 3 items for each array field.`;
 
   const completion = await openai.chat.completions.create({
-    model: 'gpt-4-turbo-preview',
+    model: 'gpt-5-nano',
     messages: [
       { role: 'system', content: systemPrompt },
       { role: 'user', content: userPrompt }
