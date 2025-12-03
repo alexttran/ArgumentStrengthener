@@ -33,7 +33,7 @@ Be intellectually honest, balanced, and thorough. Avoid bias and focus on logica
 
 Provide your analysis in the following JSON format:
 {
-  "steelmanCounter": "The strongest possible counterargument (2-3 paragraphs)...",
+  "steelmanCounter": "The strongest possible counterargument (1-2 paragraphs)...",
   "weakPoints": ["Weak point 1", "Weak point 2", "Weak point 3"],
   "misconceptions": ["Misconception 1", "Misconception 2", "Misconception 3"],
   "reinforcements": ["Reinforcement strategy 1", "Reinforcement strategy 2", "Reinforcement strategy 3"],
