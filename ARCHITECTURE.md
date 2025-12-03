@@ -20,7 +20,7 @@ graph TB
     end
 
     subgraph "External Services"
-        I -->|Chat Completions API| J[OpenAI GPT-4]
+        I -->|Chat Completions API| J[OpenAI GPT-5]
         J -->|JSON Response| I
     end
 
@@ -135,7 +135,7 @@ graph TB
 **Responsibilities**:
 - Initializes OpenAI client with API key
 - Constructs system and user prompts
-- Makes API calls to GPT-4
+- Makes API calls to GPT-5
 - Parses JSON responses
 - Transforms API responses into application types
 
@@ -229,19 +229,7 @@ No abstraction layer between our service and OpenAI.
 
 **Why**: For an MVP/demo, persistence adds complexity without clear benefit. Users can copy results if needed.
 
-### 2. No Authentication
-**Decision**: Public API, no user accounts.
-
-**Trade-off**:
-- ✅ Frictionless user experience
-- ✅ No auth complexity
-- ❌ Can't rate-limit by user
-- ❌ API key exposure risk
-- ❌ No personalization
-
-**Why**: Focus on core functionality first. Authentication can be added later if needed.
-
-### 3. Synchronous API Calls
+### 2. Synchronous API Calls
 **Decision**: Frontend waits for full response before displaying results.
 
 **Trade-off**:
@@ -253,20 +241,7 @@ No abstraction layer between our service and OpenAI.
 
 **Why**: OpenAI's API doesn't support streaming for JSON mode. Could implement streaming for better UX in future.
 
-### 4. Client-Side Rendering Only
-**Decision**: React SPA with no server-side rendering.
-
-**Trade-off**:
-- ✅ Simpler deployment
-- ✅ Better local development experience
-- ✅ Clear separation of concerns
-- ❌ Slower initial page load
-- ❌ SEO limitations
-- ❌ No pre-rendered content
-
-**Why**: This is a tool, not content. SEO isn't critical, and users expect interactivity.
-
-### 5. Monolithic Backend
+### 3. Monolithic Backend
 **Decision**: Single Express server handles all backend logic.
 
 **Trade-off**:
@@ -277,89 +252,3 @@ No abstraction layer between our service and OpenAI.
 - ❌ All logic in one process
 
 **Why**: Current scale doesn't justify microservices complexity.
-
-### 6. No Request Caching
-**Decision**: Every request hits OpenAI's API fresh.
-
-**Trade-off**:
-- ✅ Always fresh results
-- ✅ No cache invalidation logic
-- ❌ Higher API costs
-- ❌ Slower response times
-- ❌ Duplicate work for similar arguments
-
-**Why**: Each argument is likely unique. Caching similar arguments is complex and may not provide real value.
-
-## Scalability Considerations
-
-### Current Bottlenecks
-1. **OpenAI API Rate Limits**: Limited by OpenAI's tier-based quotas
-2. **Response Time**: GPT-4 takes 10-30 seconds per request
-3. **Single Server**: No horizontal scaling yet
-
-### Future Improvements
-1. **Add Redis Caching**: Cache exact-match arguments
-2. **Queue System**: Use Bull/BullMQ for background processing
-3. **Load Balancing**: Multiple backend instances behind nginx
-4. **Rate Limiting**: Implement per-IP or per-user rate limits
-5. **Database**: Store analyses for comparison and tracking
-
-## Security Considerations
-
-### Current Measures
-1. **Environment Variables**: API key not in code
-2. **CORS**: Restricted to known frontend origin
-3. **Input Validation**: Non-empty string check
-
-### Future Improvements
-1. **Input Sanitization**: Prevent injection attacks
-2. **Rate Limiting**: Prevent abuse/DoS
-3. **API Key Rotation**: Automated key rotation
-4. **Request Size Limits**: Prevent resource exhaustion
-5. **HTTPS**: Encrypt data in transit (for production)
-
-## Deployment Architecture
-
-### Development
-- Frontend: Vite dev server (http://localhost:5173)
-- Backend: tsx watch (http://localhost:3000)
-- CORS: Enabled for localhost
-
-### Production (Recommended)
-- Frontend: Static build served via CDN or nginx
-- Backend: Node.js server behind reverse proxy
-- Database: PostgreSQL or Redis (if adding persistence)
-- Environment: Containerized via Docker
-- Orchestration: Docker Compose or Kubernetes
-
-## Technology Choices Rationale
-
-### Why React?
-- Component-based architecture matches our UI structure
-- Large ecosystem and community
-- Excellent TypeScript support
-- Familiar to most developers
-
-### Why Vite?
-- Faster than Create React App
-- Better dev experience with HMR
-- Modern tooling (ES modules)
-- Great TypeScript support out of the box
-
-### Why Express?
-- De facto standard for Node.js APIs
-- Minimal but extensible
-- Large middleware ecosystem
-- Well-documented and stable
-
-### Why TypeScript?
-- Catches errors at compile time
-- Better IDE support
-- Self-documenting code via types
-- Easier refactoring
-
-### Why OpenAI API?
-- State-of-the-art language understanding
-- JSON mode for structured output
-- Reliable and well-documented
-- Good balance of cost vs. quality

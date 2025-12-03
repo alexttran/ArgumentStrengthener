@@ -16,7 +16,7 @@ The goal is to transform flimsy takes into bulletproof positions through rigorou
 
 ## Track Chosen
 
-General AI Application Track - Building a practical tool that uses LLMs for intellectual debate preparation and argument analysis.
+Track C: Mini AI Feature (Frontend + Backend)
 
 ## Step-by-Step Run Instructions
 
@@ -93,13 +93,12 @@ General AI Application Track - Building a practical tool that uses LLMs for inte
 - **Node.js** - JavaScript runtime
 - **Express.js** - Web application framework
 - **TypeScript** - Type-safe server-side code
-- **OpenAI API** - GPT-4 for argument analysis
-- **dotenv** - Environment variable management
+- **OpenAI API** - GPT-5-nano for argument analysis
 - **CORS** - Cross-origin resource sharing middleware
 
 ## How the LLM is Integrated
 
-The application integrates OpenAI's GPT-4 (specifically the gpt-4-turbo-preview model) through the official OpenAI Node.js SDK. The integration follows this flow:
+The application integrates OpenAI's GPT-5 (specifically the gpt-5-nano model) through the official OpenAI Node.js SDK. The integration follows this flow:
 
 1. **User Input**: User submits an argument through the React frontend
 2. **API Request**: Frontend sends POST request to `/api/analysis`
@@ -136,18 +135,12 @@ Provides the argument and specifies the expected output format:
 - Specifies minimum item counts (at least 3 per category)
 - Uses JSON mode to ensure parseable responses
 
-This structure ensures:
-- **Consistency**: Every response follows the same format
-- **Completeness**: All five analysis components are included
-- **Intellectual Honesty**: System prompt emphasizes steelman (not strawman) arguments
-- **Parseability**: JSON mode guarantees machine-readable output
-
 ## Limitations and Assumptions
 
 ### Limitations
 1. **Rate Limits**: Subject to OpenAI API rate limits and quotas
 2. **Response Time**: Analysis takes 10-30 seconds depending on argument complexity
-3. **Model Constraints**: Limited by the capabilities and biases of GPT-4
+3. **Model Constraints**: Limited by the capabilities and biases of GPT-5
 4. **No Context Retention**: Each analysis is independent; no conversation history
 5. **Language**: Optimized for English-language arguments
 6. **Cost**: Each analysis incurs OpenAI API costs
@@ -155,14 +148,8 @@ This structure ensures:
 ### Assumptions
 1. **User Intent**: Assumes users genuinely want to strengthen their arguments, not just confirm bias
 2. **Good Faith**: Assumes arguments submitted are made in good faith for intellectual exploration
-3. **Network**: Assumes reliable internet connection for API calls
-4. **Browser**: Assumes modern browser with ES6+ support
-5. **Expertise Level**: Assumes users can understand and apply advanced argumentative concepts
+3. **Expertise Level**: Assumes users can understand and apply advanced argumentative concepts
 
-### Known Issues
-- No input sanitization for extremely long arguments (may hit token limits)
-- No caching of similar arguments (each request is fresh)
-- Error messages could be more specific about failure types
 
 ## AI Tools Used During Development
 
@@ -178,6 +165,5 @@ This project was developed with assistance from AI coding tools:
 - Structuring the TypeScript interfaces for type safety
 - Crafting the system prompt for optimal LLM behavior
 - Debugging CORS and proxy configuration issues
-- Writing clear commit messages throughout development
 
 The core prompt engineering strategy and application architecture were human-designed, with AI assistance for implementation details and code quality.
