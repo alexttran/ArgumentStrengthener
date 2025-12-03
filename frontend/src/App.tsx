@@ -52,6 +52,13 @@ export default function App() {
           </div>
         )}
 
+        {isLoading && (
+          <div className="loading-container">
+            <div className="spinner"></div>
+            <p>Analyzing your argument...</p>
+          </div>
+        )}
+
         <AnalysisResults result={result} />
       </main>
     </div>
