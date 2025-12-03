@@ -154,7 +154,7 @@ Provides the argument and specifies the expected output format:
 ## AI Tools Used During Development
 
 ### Development Process
-This project was developed with assistance from AI coding tools:
+This project was developed with assistance from ChatGPT:
 
 1. **Code Generation**: Initial project structure, boilerplate code, and component scaffolding
 2. **Problem Solving**: Debugging environment variable loading issues and API integration
